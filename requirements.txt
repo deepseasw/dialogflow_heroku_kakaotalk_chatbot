@@ -1,0 +1,4 @@
+﻿Flask
+requests
+pillow
+gunicorn
