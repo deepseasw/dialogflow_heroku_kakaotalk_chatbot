@@ -1,1 +1,2 @@
-ÀÚ¼¼ÇÑ »ç¿ë¹ıÀº doc Æú´õÀÇ pdf ¹®¼­¸¦ Âü°íÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.
+< ì‚¬ìš© ë°©ë²• >
+- https://github.com/deepseasw/dialogflow_heroku_kakaotalk_chatbot/raw/master/doc/dialogflow_heroku_kakaotalk_chatbot.pdf
