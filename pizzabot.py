@@ -4,14 +4,14 @@
 
 import requests
 import json
-import urllib2
 
-from PIL import ImageFile
+from PIL import Image
+from io import BytesIO
 from flask import Flask, request, make_response, jsonify
 
 
 
-ERROR_MESSAGE           = '네트워크 접속에 문제가 발생하였습니다. 잠시 후 다시 시도해주세요.'
+ERROR_MESSAGE           = '네트워크 접속에 문제가 발생하였습니다. 잠시 후 다시 시도해주세요.' 
 URL_OPEN_TIME_OUT       = 10
 
 
@@ -48,25 +48,13 @@ def get_photo_size(url):
         return width, height
     
     try:
-        file = urllib2.urlopen(url, timeout = URL_OPEN_TIME_OUT)
-        p = ImageFile.Parser()
-        
-        while 1:
-            data = file.read(1024)
-            
-            if not data:
-                break
-            
-            p.feed(data)
-            
-            if p.image:
-                width = p.image.size[0]
-                height = p.image.size[1]
-                break 
-        
-        file.close()
+        data = requests.get(url).content
+        im = Image.open(BytesIO(data))    
+				
+        width = im.size[0]
+        height = im.size[1]
     except:
-        print 'get_photo_size error'
+        print('get_photo_size error')
     
     return width, height
 
@@ -144,7 +132,7 @@ def get_answer(text, user_key):
     
     data_header = {
         'Content-Type': 'application/json; charset=utf-8',
-        'Authorization': 'Bearer adfb4242e4a0412f9041eef6cac608df'
+        'Authorization': 'Bearer adfb4242e4a...'   # Dialogflow의 Client access token 입력
     }
     
     dialogflow_url = 'https://api.dialogflow.com/v1/query?v=20150910'
@@ -189,9 +177,9 @@ def process_pizza_info(pizza_name):
 # 피자 주문 처리
 #----------------------------------------------------
 def process_pizza_order(pizza_name, address):
-
-    answer = pizza_name.encode('UTF-8') + '를 주문하셨습니다.'
-    answer += " '" + address.encode('UTF-8') + "'의 주소로 지금 배달하도록 하겠습니다."
+	
+    answer = pizza_name + '를 주문하셨습니다.'
+    answer += " '" + address + "'의 주소로 지금 배달하도록 하겠습니다."
     answer += ' 이용해주셔서 감사합니다.' 
 
     return answer
