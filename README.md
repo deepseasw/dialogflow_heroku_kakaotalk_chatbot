@@ -1,2 +1,1 @@
-< 사용 방법 >
-https://github.com/deepseasw/dialogflow_heroku_kakaotalk_chatbot/raw/master/doc/dialogflow_heroku_kakaotalk_chatbot.pdf
+자세한 사용법은 doc 폴더의 pdf 파일을 참고하시기 바랍니다.
